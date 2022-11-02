@@ -1,0 +1,310 @@
+@font-face {
+  font-family: proxima-nova-soft;
+  src: url(fonts/proxima-nova-soft.otf);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+
+  opacity: 1;
+
+}
+
+input[type=number] {
+  width: 5.5rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; /* => 10px = 1 rem*/
+}
+
+body {
+  height: 100vh;
+  font: 1.6rem proxima-nova-soft;
+  background: #2f3640;
+  margin: 0;
+}
+
+body a {
+  text-decoration: none;
+  color: black;
+}
+
+body a:hover {
+  color: #55d6aa;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:'header''main''footer';
+  grid-template-columns: 1fr;
+  grid-template-rows: 5rem 1fr 5rem;
+  height: 100%;
+}
+
+header {
+  grid-area: header;
+  background-color: #55d6aa;
+  color: #444;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+header a {
+  color: #444;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header a:hover {
+  color: #000;
+}
+
+.brand a {
+  font-size: 3rem;
+}
+
+.right-navbar {
+  font-size: 2rem;
+  margin-right:3rem;
+
+}
+
+footer {
+  display: flex;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  font: 1.5rem proxima-nova-soft;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.products li {
+  flex: 0 1 30rem;
+  height: 42rem;
+  margin: 1rem 1rem 5rem;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  box-shadow: 0.5rem 0.5rem 0.5rem 0.5rem rgba(68, 68, 68, 0.6);
+  max-width: 300px;
+  text-align: center;
+  background-color: #fff;
+  float: left;
+  margin: 3rem 2rem 2rem 3rem;
+  border-radius: 1.5rem;
+}
+
+.product img {
+  max-height: 26rem;
+  max-width: 22rem;
+  margin-top: 2rem;
+}
+
+.product-name {
+  line-height: 2.2rem;
+}
+
+.product-price {
+  font-size: 2rem;
+  padding: 2rem;
+}
+
+.product-price i {
+  margin-right: 0.1rem;
+}
+
+.button-div {
+  margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+  background: #55d6aa;
+  border: 0.1rem solid #2ecc71;
+  border-radius: 5rem;
+  outline: none;
+  color: white;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.button-div:hover {
+  background: #2f3640;
+}
+
+.heart {
+  color: darkred;
+  font-weight: bold;
+}
+
+//-------- Login styling ---------
+
+.form-container {
+  // empty container
+}
+
+.form-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.box {
+  width: 30rem;
+  padding: 4rem;
+  background: #191919;
+  text-align: center;
+  border-radius: 1.5rem;
+  list-style-type: none;
+
+}
+
+.box h1 {
+  color: white;
+  text-transform: uppercase;
+}
+
+.box input[type = "text"], .box input[type = "password"] {
+  background: none;
+  display: block;
+  margin: 2rem auto;
+  text-align: center;
+  border: 0.2rem solid #444;
+  padding: 1.4rem 1rem;
+  width: 20rem;
+  outline: none;
+  color: white;
+  border-radius: 2.4rem;
+  transition: 0.25s;
+}
+
+.box input[type = "text"]:focus, .box input[type = "password"]:focus {
+  width: 25rem;
+  border-color: #55d6aa;
+}
+
+.box button[type = "submit"] {
+  background: none;
+  display: block;
+  margin: 2rem auto;
+  text-align: center;
+  border: 0.2rem solid #55d6aa;
+  padding: 1.4rem 4rem;
+  outline: none;
+  color: white;
+  border-radius: 2.4rem;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.box button[type = "submit"]:hover {
+  background: #55d6aa;
+}
+
+//-------- Cart styling ----------
+
+.cart {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.cart-list {
+  color: #55d6aa;
+
+  flex: 1 1 60rem;
+}
+
+.cart-list-container {
+  padding: 1rem;
+  list-style-type: none;
+}
+
+.cart-list-container li {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 0.1rem solid #55d6aa;
+}
+
+.cart-list-container img {
+  max-width: 10rem;
+  max-height: 10rem;
+}
+
+.cart-list-container li:first-child {
+  align-items: flex-end;
+}
+
+.cart-image {
+  flex: 1 1;
+}
+
+.cart-name {
+  flex: 8 1;
+}
+
+.cart-price {
+  flex: 1 2;
+  text-align: right;
+}
+
+.cart-name > div {
+  padding: 1rem;
+}
+
+.cart-list h3 {
+  margin: 0;
+}
+
+.cart-list button, .cart-list input {
+  font-size: 1.3rem;
+  padding: 0.5rem;
+}
+
+.cart-button {
+  margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+  background: #55d6aa;
+  border: 2px solid #2ecc71;
+  outline: none;
+  color: white;
+  border-radius: 5rem;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.cart-button:hover {
+  background: none;
+}
+
+.pay-cart {
+  flex: 1 1 20rem;
+  border-radius: 0.5rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  padding: 1rem;
+  border: solid #55d6aa;
+  color: #55d6aa;
+}
+
+#pay-button {
+  width: 10rem;
+  height: 5rem;
+}
