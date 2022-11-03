@@ -1,15 +1,27 @@
+
 const express = require('express');
 const cors = require('cors');
 const data = require("./data.js");
 const mongoose = require('mongoose');
 const config = require("./config");
 const userRouter = require("./routes/UserRoute.js");
+const authRouter = require("./routes/AuthRoute");
+const expressAsyncHandler = require('express-async-handler');
+
 
 const app = express();
-app.use(cors());
 
+//EXPRESS MIDDLEWARE
+app.use(cors());
+app.use((err, req, res, next) => {
+    const status = err.name && err.name === 'ValidationError' ? 400 : 500;
+    res.status(status).send({
+        message: err.message
+    });
+});
 //ROUTERS MIDDLEWARE
 app.use('/api/users', userRouter);
+app.use('/api/auth', authRouter);
 
 //PRODUCTS ROUTES
 app.get("/api/products", (req, res) => {

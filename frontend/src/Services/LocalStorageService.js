@@ -5,8 +5,18 @@ const LocalStorageService = {
             []; //Empty array
         return cartItems;
     },
+    getCredentials: () => {
+        const credentials = localStorage.getItem('credentials') ? JSON.parse(localStorage.getItem('credentials')) : {};
+        return credentials;
+    },
     setCartItems: (cartItems) => {
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    },
+    setCredentials: (credentials) => {
+        localStorage.setItem('credentials', JSON.stringify(credentials));
+    },
+    deleteCredentials: () => {
+        localStorage.setItem('credentials', JSON.stringify({}));
     }
 };
 

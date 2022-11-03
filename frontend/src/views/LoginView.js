@@ -1,10 +1,40 @@
+import ApiService from "../Services/ApiService";
+import LocalStorageService from "../Services/LocalStorageService";
+
+const login = async ({username, password}) => {
+    try {
+        return await ApiService.login(username, password);
+    } catch (e) {
+        console.log(e);
+        return {error: e.response || e.message};
+    }
+};
 const LoginView = {
-    afterViewInit: ()=>{},
-    render: ()=>{
+    afterViewInit: () => {
+        document.getElementById("login-form")
+            .addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const credentials = await login({
+                    username: document.getElementById("username").value,
+                    password: document.getElementById("password").value
+                });
+                if (credentials.error) {
+                    alert(credentials.error);
+                } else {
+                    LocalStorageService.setCredentials(credentials);
+                    document.location.hash = '/';
+                }
+            });
+    },
+    render: () => {
+        if (Object.keys((LocalStorageService.getCredentials())).length !== 0) {
+            document.location.hash = '/';
+            return '';
+        }
         return `
         <div class="form-container">
             <div class="form-content">
-                <form id="signin-form">
+                <form id="login-form">
                     <ul class="form-items box">
                     <li>
                         <h1>Login</h1>

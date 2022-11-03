@@ -1,0 +1,15 @@
+const config = require('../config.js');
+const jwt = require('jsonwebtoken');
+
+const JwtService = {
+    generateToken: (user) => {
+        return jwt.sign({
+                _id: user._id,
+                username: user.username,
+                isAdmin: user.isAdmin
+            },
+            config.JWT_SECRET
+        );
+    }
+};
+module.exports = JwtService;

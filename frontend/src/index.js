@@ -4,14 +4,15 @@ import {parseRequestUrl} from "./utils/UrlParser.js";
 import ErrorView from "./views/ErrorView.js";
 import CartView from "./views/CartView.js";
 import LoginView from "./views/LoginView.js";
+import LogoutView from "./views/LogoutView";
 
 const routes = {
     '/': HomeView,
     '/login': LoginView,
     '/product/:id': ProductView,
     '/cart/:id': CartView,
-    '/cart': CartView
-
+    '/cart': CartView,
+    '/logout': LogoutView
 }
 
 const router = async () => {

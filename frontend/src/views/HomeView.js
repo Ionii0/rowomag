@@ -1,5 +1,6 @@
 import ApiService from "../Services/ApiService";
 import CartService from "../Services/CartService";
+import LocalStorageService from "../Services/LocalStorageService";
 
 const addToCartButtonListener =  (buttonDivs) => {
     for (let button of buttonDivs) {
@@ -16,6 +17,10 @@ const HomeView = {
         addToCartButtonListener(buttonDivs);
     },
     render: async () => {
+        if (Object.keys((LocalStorageService.getCredentials())).length === 0) {
+            document.location.hash = '/login';
+            return '';
+        }
         const response = await fetch("http://localhost:5000/api/products", {
             headers: {
                 'Content-Type': 'application/json'
