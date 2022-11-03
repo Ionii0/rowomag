@@ -1,4 +1,5 @@
 import CartService from "../Services/CartService.js";
+import LocalStorageService from "../Services/LocalStorageService";
 
 
 const changeQuantityListener = (quantitySelectors) => {
@@ -33,6 +34,11 @@ const CartView = {
         deleteButtonListener(deleteButtons);
     },
     render: () => {
+        if (Object.keys((LocalStorageService.getCredentials())).length === 0) {
+            document.location.hash = '/login';
+            alert("You have to log in before accessing the CART page");
+            return '';
+        }
         const cartItems = CartService.getCartItems();
         return `
         <div class="cart">
