@@ -18,7 +18,7 @@ authRouter.post('/login',bodyParser.json(), expressAsyncHandler(async (req, res)
         } else {
             res.send({
                 _id: loggedInUser._id,
-                username: loggedInUser.name,
+                username: loggedInUser.username,
                 tokens: loggedInUser.tokens,
                 isAdmin: loggedInUser.isAdmin,
                 jwt: JwtService.generateToken(loggedInUser),

@@ -72,7 +72,7 @@ const CartView = {
             </div>
               <div class="pay-cart">
                 <h3> Total (${cartItems.reduce((a, c) => a + c.quantity, 0)} items):
-                $${cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+                 <i class="fa-solid fa-coins" style="margin-right:1rem"></i>${cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
                 </h3>
                 <button id="pay-button" class="cart-button">Pay</button>
             </div>

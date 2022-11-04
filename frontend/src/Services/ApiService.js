@@ -20,11 +20,11 @@ const ApiService = {
             },
             body: JSON.stringify({username: username, password: password})
         });
-        if (!response || !response.ok) {
-            console.error(response);
-            throw new Error(response.statusText);
+        if (!response || !response.ok || response.statusText !== 'OK') {
+            const responseJson = await response.json();
+            throw new Error(responseJson.message);
         }
-        return await response.json();
+        return response.json();
     }
 };
 

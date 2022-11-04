@@ -5,6 +5,7 @@ import ErrorView from "./views/ErrorView.js";
 import CartView from "./views/CartView.js";
 import LoginView from "./views/LoginView.js";
 import LogoutView from "./views/LogoutView";
+import HeaderRenderer from "./utils/HeaderRenderer";
 
 const routes = {
     '/': HomeView,
@@ -23,6 +24,8 @@ const router = async () => {
     const parseUrl = resource + id + action;
     const view = routes[parseUrl] ? routes[parseUrl] : ErrorView;
     const main = document.getElementById("main-container");
+    const header = document.getElementById("header-container");
+    header.innerHTML = await HeaderRenderer.render();
     main.innerHTML = await view.render();
     await view.afterViewInit();
 }

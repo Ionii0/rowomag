@@ -5,8 +5,8 @@ const login = async ({username, password}) => {
     try {
         return await ApiService.login(username, password);
     } catch (e) {
-        console.log(e);
-        return {error: e.response || e.message};
+        console.log("Inside login function: " + e);
+        return e;
     }
 };
 const LoginView = {
@@ -18,8 +18,8 @@ const LoginView = {
                     username: document.getElementById("username").value,
                     password: document.getElementById("password").value
                 });
-                if (credentials.error) {
-                    alert(credentials.error);
+                if (credentials.message) {
+                    alert(credentials.message);
                 } else {
                     LocalStorageService.setCredentials(credentials);
                     document.location.hash = '/';
