@@ -1,13 +1,14 @@
-import CartService from "../Services/CartService.js";
+import CartManager from "../utils/CartManager.js";
 import LocalStorageService from "../Services/LocalStorageService";
+import ApiService from "../Services/ApiService";
 
 
 const changeQuantityListener = (quantitySelectors) => {
     for (let selector of quantitySelectors) {
         selector.addEventListener('change', (e) => {
-            const item = CartService.getCartItems()
+            const item = CartManager.getCartItems()
                 .find((x) => x._id === selector.id);
-            CartService.addToCart({...item, quantity: Number(e.target.value)});
+            CartManager.addToCart({...item, quantity: Number(e.target.value)});
             CartView.reRenderView();
         })
     }
@@ -16,10 +17,32 @@ const changeQuantityListener = (quantitySelectors) => {
 const deleteButtonListener = (deleteButtons) => {
     for (let button of deleteButtons) {
         button.addEventListener('click', (e) => {
-            CartService.deleteItemById(e.target.id);
+            CartManager.deleteItemById(e.target.id);
             CartView.reRenderView();
         })
     }
+}
+
+const payButtonListener = (payButton) => {
+    payButton.addEventListener('click', async () => {
+        const cartItems = CartManager.getCartItems();
+        const orderData = {
+            items: cartItems,
+            price: cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
+        };
+        try {
+            await ApiService.sendOrder(orderData);
+            const userCredentials = LocalStorageService.getCredentials();
+            const price = cartItems.reduce((a, c) => a + c.price * c.quantity, 0);
+            userCredentials.tokens = userCredentials.tokens - price;
+            LocalStorageService.setCredentials(userCredentials);
+            CartManager.deleteAllItems();
+            document.location.hash = '/';
+        } catch (e) {
+            alert(e.message);
+        }
+
+    })
 }
 
 const CartView = {
@@ -30,8 +53,11 @@ const CartView = {
     afterViewInit: () => {
         const quantitySelectors = document.getElementsByClassName("quantity");
         const deleteButtons = document.getElementsByClassName("cart-button");
+        const payButton = document.getElementById("pay-button");
         changeQuantityListener(quantitySelectors);
         deleteButtonListener(deleteButtons);
+        payButtonListener(payButton);
+
     },
     render: () => {
         if (Object.keys((LocalStorageService.getCredentials())).length === 0) {
@@ -39,7 +65,7 @@ const CartView = {
             alert("You have to log in before accessing the CART page");
             return '';
         }
-        const cartItems = CartService.getCartItems();
+        const cartItems = CartManager.getCartItems();
         return `
         <div class="cart">
             <div class="cart-list">

@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const config = require("./config");
 const userRouter = require("./routes/UserRoute.js");
 const authRouter = require("./routes/AuthRoute");
-const expressAsyncHandler = require('express-async-handler');
+const orderRouter = require("./routes/OrderRoute");
 
 
 const app = express();
@@ -19,9 +19,11 @@ app.use((err, req, res, next) => {
         message: err.message
     });
 });
+
 //ROUTERS MIDDLEWARE
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/order', orderRouter);
 
 //PRODUCTS ROUTES
 app.get("/api/products", (req, res) => {

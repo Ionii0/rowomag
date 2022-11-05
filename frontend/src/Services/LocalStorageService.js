@@ -17,6 +17,9 @@ const LocalStorageService = {
     },
     deleteCredentials: () => {
         localStorage.setItem('credentials', JSON.stringify({}));
+    },
+    deleteAllCartItems: () => {
+        localStorage.removeItem('cartItems');
     }
 };
 

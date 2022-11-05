@@ -1,3 +1,5 @@
+import LocalStorageService from "./LocalStorageService";
+
 const ApiService = {
     getProductById: async (id) => {
         const response = await fetch(`http://localhost:5000/api/products/${id}`, {
@@ -21,6 +23,22 @@ const ApiService = {
             body: JSON.stringify({username: username, password: password})
         });
         if (!response || !response.ok || response.statusText !== 'OK') {
+            const responseJson = await response.json();
+            throw new Error(responseJson.message);
+        }
+        return response.json();
+    },
+    sendOrder: async (orderData) => {
+        const userCredentials = LocalStorageService.getCredentials();
+        const response = await fetch(`http://localhost:5000/api/order/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${userCredentials.jwt}`
+            },
+            body: JSON.stringify(orderData)
+        });
+        if (!response || response.statusText !== 'Created') {
             const responseJson = await response.json();
             throw new Error(responseJson.message);
         }

@@ -8,7 +8,7 @@ userRouter.get(`/createadmin`, expressAsyncHandler(async (req, res) => {
             const userModel = new UserModel({
                 username: 'admin',
                 password: 'euroavia',
-                tokens: 0,
+                tokens: 100,
                 isAdmin: true
             });
             const createdUser = await userModel.save();

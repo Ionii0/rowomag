@@ -1,6 +1,6 @@
-import LocalStorageService from "./LocalStorageService.js";
+import LocalStorageService from "../Services/LocalStorageService.js";
 
-const CartService = {
+const CartManager = {
     addToCart: (item) => {
         let cartItems = LocalStorageService.getCartItems();
         const existItem = cartItems.find(x => x._id === item._id);
@@ -21,6 +21,9 @@ const CartService = {
     deleteItemById: (id) => {
         const cartItems = LocalStorageService.getCartItems();
         LocalStorageService.setCartItems(cartItems.filter((x) => x._id !== id));
+    },
+    deleteAllItems: () => {
+        LocalStorageService.deleteAllCartItems();
     }
 };
-export default CartService;
+export default CartManager;
