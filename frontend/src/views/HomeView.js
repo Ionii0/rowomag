@@ -2,11 +2,11 @@ import ApiService from "../Services/ApiService";
 import CartManager from "../utils/CartManager";
 import LocalStorageService from "../Services/LocalStorageService";
 
-const addToCartButtonListener =  (buttonDivs) => {
+const addToCartButtonListener = (buttonDivs) => {
     for (let button of buttonDivs) {
-       button.addEventListener("click", async (e) => {
+        button.addEventListener("click", async (e) => {
             const product = await ApiService.getProductById(e.currentTarget.id);
-            await  CartManager.addToCart({...product, quantity: Number(1)});
+            CartManager.addToCart({...product, quantity: Number(1)});
         });
     }
 }

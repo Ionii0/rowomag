@@ -8,8 +8,34 @@ const ApiService = {
             }
         });
         if (!response || !response.ok) {
-            console.log(response);
             return `<div> Error getting product with id{ ${id} } from server</div>`;
+        }
+        return await response.json();
+    },
+
+    getPendingOrders: async (userCredentials) => {
+        const response = await fetch(`http://localhost:5000/api/order/pending`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${userCredentials.jwt}`
+            }
+        });
+        if (!response || !response.ok) {
+            const responseJson = await response.json();
+            throw new Error(responseJson.message);
+        }
+        return await response.json();
+    },
+    getDeliveredOrders: async (userCredentials) => {
+        const response = await fetch(`http://localhost:5000/api/order/delivered`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${userCredentials.jwt}`
+            }
+        });
+        if (!response || !response.ok) {
+            const responseJson = await response.json();
+            throw new Error(responseJson.message);
         }
         return await response.json();
     },
@@ -28,6 +54,7 @@ const ApiService = {
         }
         return response.json();
     },
+
     sendOrder: async (orderData) => {
         const userCredentials = LocalStorageService.getCredentials();
         const response = await fetch(`http://localhost:5000/api/order/`, {
@@ -43,7 +70,21 @@ const ApiService = {
             throw new Error(responseJson.message);
         }
         return response.json();
+    },
+    deliverOrderById: async (id, userCredentials) => {
+        const response = await fetch(`http://localhost:5000/api/order/deliver-order/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${userCredentials.jwt}`
+            }
+        });
+        if (!response || !response.ok) {
+            const responseJson = await response.json();
+            throw new Error(responseJson.message);
+        }
+        return await response.json();
     }
+
 };
 
 export default ApiService;

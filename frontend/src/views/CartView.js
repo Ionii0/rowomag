@@ -25,23 +25,26 @@ const deleteButtonListener = (deleteButtons) => {
 
 const payButtonListener = (payButton) => {
     payButton.addEventListener('click', async () => {
-        const cartItems = CartManager.getCartItems();
-        const orderData = {
-            items: cartItems,
-            price: cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
-        };
-        try {
-            await ApiService.sendOrder(orderData);
-            const userCredentials = LocalStorageService.getCredentials();
-            const price = cartItems.reduce((a, c) => a + c.price * c.quantity, 0);
-            userCredentials.tokens = userCredentials.tokens - price;
-            LocalStorageService.setCredentials(userCredentials);
-            CartManager.deleteAllItems();
-            document.location.hash = '/';
-        } catch (e) {
-            alert(e.message);
+        if (CartManager.getCartItems().length > 0) {
+            const cartItems = CartManager.getCartItems();
+            const orderData = {
+                items: cartItems,
+                price: cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
+            };
+            try {
+                await ApiService.sendOrder(orderData);
+                const userCredentials = LocalStorageService.getCredentials();
+                const price = cartItems.reduce((a, c) => a + c.price * c.quantity, 0);
+                userCredentials.tokens = userCredentials.tokens - price;
+                LocalStorageService.setCredentials(userCredentials);
+                CartManager.deleteAllItems();
+                document.location.hash = '/';
+            } catch (e) {
+                alert(e.message);
+            }
+        } else {
+            alert("Your cart is empty !");
         }
-
     })
 }
 

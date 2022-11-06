@@ -307,3 +307,101 @@ footer {
   width: 10rem;
   height: 5rem;
 }
+
+//-------- Admin pending orders styling ----------
+.admin {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.admin-list {
+  color: #55d6aa;
+
+  flex: 1 1 60rem;
+}
+
+.admin-list-container {
+  padding: 1rem;
+  list-style-type: none;
+}
+
+.admin-list-container li {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 0.1rem solid #55d6aa;
+}
+
+.admin-list-container img {
+  max-width: 10rem;
+  max-height: 10rem;
+}
+
+.admin-list-container li:first-child {
+  align-items: flex-end;
+}
+
+.admin-order {
+  flex: 8 1;
+}
+
+.admin-action {
+  flex: 1 2;
+  text-align: right;
+}
+
+.admin-order > div {
+  padding: 1rem;
+}
+
+.admin-list h3 {
+  margin: 0;
+}
+
+.admin-list button, .admin-list input {
+  font-size: 1.3rem;
+  padding: 0.5rem;
+}
+
+.admin-button {
+  background: #55d6aa;
+  border: 2px solid #2ecc71;
+  outline: none;
+  color: white;
+  border-radius: 5rem;
+  transition: 0.25s;
+  cursor: pointer;
+  float:right;
+}
+.admin-button:hover {
+  background: none;
+}
+//-------- Admin delivered orders styling ----------
+.delivered-list {
+  color: #c3d655 !important;
+
+  flex: 1 1 60rem;
+}
+.admin-delivered-list h3 {
+  margin: 0;
+}
+
+#admin-delivered{
+  color: #c3d655 !important;
+
+  flex: 1 1 60rem;
+}
+.admin-delivered-list-container {
+  padding: 1rem;
+  list-style-type: none;
+}
+
+.admin-delivered-list-container li {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 0.1rem solid #c3d655;
+}
