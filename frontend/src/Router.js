@@ -4,11 +4,13 @@ import ErrorView from "./views/ErrorView.js";
 import CartView from "./views/CartView.js";
 import LoginView from "./views/LoginView.js";
 import LogoutView from "./views/LogoutView";
-import AdminView from "./views/AdminView";
+import OrdersView from "./views/OrdersView";
+import CreateUserView from "./views/CreateUserView";
 
 const routes = {
     '/': HomeView,
-    '/admin': AdminView,
+    '/orders': OrdersView,
+    '/create-user': CreateUserView,
     '/cart': CartView,
     '/login': LoginView,
     '/logout': LogoutView

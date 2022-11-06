@@ -6,7 +6,6 @@ const authRouter = express.Router();
 const bodyParser = require('body-parser');
 
 authRouter.post('/login',bodyParser.json(), expressAsyncHandler(async (req, res) => {
-    console.log(req.body);
         const loggedInUser = await UserModel.findOne({
             username: req.body.username,
             password: req.body.password

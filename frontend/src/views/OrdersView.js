@@ -5,15 +5,15 @@ const deliverButtonsListener = (deliverButtons) => {
     for (let button of deliverButtons) {
         button.addEventListener('click', async (e) => {
             await ApiService.deliverOrderById(e.target.id, LocalStorageService.getCredentials());
-            await AdminView.reRenderView();
+            await OrdersView.reRenderView();
         })
     }
 };
 
-const AdminView = {
+const OrdersView = {
     reRenderView: async () => {
-        document.getElementById('main-container').innerHTML = await AdminView.render();
-        await AdminView.afterViewInit();
+        document.getElementById('main-container').innerHTML = await OrdersView.render();
+        await OrdersView.afterViewInit();
     },
     afterViewInit: () => {
         const deliverButtons = document.getElementsByClassName("admin-button");
@@ -37,7 +37,7 @@ const AdminView = {
                 `<li>
                     <div class="admin-order"> 
                         ${item.username}: ${item.items.map(product => `&nbsp ${product.name} (${product.quantity}) `)}
-                            <button id="${item._id}" class="admin-button">Deliver</button>
+                         <button id="${item._id}" class="admin-button">Deliver</button>
                     </div>   
                 </li>`
             ).join('\n')}
@@ -52,7 +52,7 @@ const AdminView = {
             deliveredOrders.map(item =>
                 `<li>
                     <div class="admin-order"> 
-                        <div>${item.username}: ${item.items.map(product => `&nbsp ${product.name} (${product.quantity}) `)}</div>  
+                        ${item.username}: ${item.items.map(product => `&nbsp ${product.name} (${product.quantity}) `)}
                     </div>   
                 </li>`
             ).join('\n')}
@@ -64,4 +64,4 @@ const AdminView = {
 
 }
 
-export default AdminView;
+export default OrdersView;

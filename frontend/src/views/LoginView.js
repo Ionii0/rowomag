@@ -40,10 +40,10 @@ const LoginView = {
                         <h1>Login</h1>
                     </li>
                     <li>
-                        <input type="text" name="username" id="username" placeholder="username">
+                        <input type="text" name="username" id="username" placeholder="username" required>
                     </li>
                     <li>
-                        <input type="password" name="password" id="password" placeholder="password">
+                        <input type="password" name="password" id="password" placeholder="password" required>
                     </li>
                     <li>
                         <button type="submit" class="submit">Login</button>

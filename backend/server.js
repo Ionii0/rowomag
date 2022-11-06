@@ -21,7 +21,7 @@ app.use((err, req, res, next) => {
 });
 
 //ROUTERS MIDDLEWARE
-app.use('/api/users', userRouter);
+app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/order', orderRouter);
 
