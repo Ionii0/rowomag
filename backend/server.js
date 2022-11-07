@@ -27,7 +27,7 @@ app.use('/api/products', productsRouter);
 
 //FOR PRODUCTION
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(`${__dirname}/../frontend`));
+    app.use(express.static(`${__dirname}/../frontend/dist`));
 }
 
 //RUN APPLICATION
