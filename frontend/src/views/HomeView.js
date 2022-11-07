@@ -8,6 +8,7 @@ const addToCartButtonListener = (buttonDivs) => {
         button.addEventListener("click", async (e) => {
             const product = await ApiService.getProductById(e.currentTarget.id, LocalStorageService.getCredentials());
             CartManager.addToCart({...product, quantity: Number(1)});
+            alert(`You have added ** ${product.name} ** to the cart!`);
         });
     }
 }
