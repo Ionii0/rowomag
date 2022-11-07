@@ -2,10 +2,12 @@ import LocalStorageService from "./LocalStorageService";
 
 const ApiService = {
 
-    getProductById: async (id) => {
+    getProductById: async (id, userCredentials) => {
         const response = await fetch(`http://localhost:5000/api/products/${id}`, {
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${userCredentials.jwt}`
             }
         });
         if (!response || !response.ok) {

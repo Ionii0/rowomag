@@ -1,4 +1,3 @@
-
 const express = require('express');
 const cors = require('cors');
 const data = require("./data.js");
@@ -7,6 +6,7 @@ const config = require("./config");
 const userRouter = require("./routes/UserRoute.js");
 const authRouter = require("./routes/AuthRoute");
 const orderRouter = require("./routes/OrderRoute");
+const productsRouter = require("./routes/ProductsRoute");
 
 
 const app = express();
@@ -24,21 +24,10 @@ app.use((err, req, res, next) => {
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/order', orderRouter);
-
-//PRODUCTS ROUTES
-app.get("/api/products", (req, res) => {
-    res.send(data.products);
-});
-
-app.get("/api/products/:id", (req, res) => {
-    const product = data.products.find((x) => x._id === req.params.id);
-    if (product)
-        res.send(product);
-    else res.status(404);
-})
+app.use('/api/products',productsRouter);
 
 //RUN APPLICATION
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log("Server is running on port 5000...")
 });
 

@@ -5,7 +5,7 @@ import LocalStorageService from "../Services/LocalStorageService";
 const addToCartButtonListener = (buttonDivs) => {
     for (let button of buttonDivs) {
         button.addEventListener("click", async (e) => {
-            const product = await ApiService.getProductById(e.currentTarget.id);
+            const product = await ApiService.getProductById(e.currentTarget.id, LocalStorageService.getCredentials());
             CartManager.addToCart({...product, quantity: Number(1)});
         });
     }
@@ -22,8 +22,10 @@ const HomeView = {
             return '';
         }
         const response = await fetch("http://localhost:5000/api/products", {
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${LocalStorageService.getCredentials().jwt}`
             }
         });
         if (!response || !response.ok) {
