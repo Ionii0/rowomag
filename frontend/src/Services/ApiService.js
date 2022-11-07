@@ -1,9 +1,10 @@
 import LocalStorageService from "./LocalStorageService";
+import Config from "../Config";
 
 const ApiService = {
 
     getProductById: async (id, userCredentials) => {
-        const response = await fetch(`http://localhost:5000/api/products/${id}`, {
+        const response = await fetch(`${Config.api}/api/products/${id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -17,7 +18,7 @@ const ApiService = {
     },
 
     getPendingOrders: async (userCredentials) => {
-        const response = await fetch(`http://localhost:5000/api/order/pending`, {
+        const response = await fetch(`${Config.api}/api/order/pending`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${userCredentials.jwt}`
@@ -31,7 +32,7 @@ const ApiService = {
     },
 
     getDeliveredOrders: async (userCredentials) => {
-        const response = await fetch(`http://localhost:5000/api/order/delivered`, {
+        const response = await fetch(`${Config.api}/api/order/delivered`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${userCredentials.jwt}`
@@ -45,7 +46,7 @@ const ApiService = {
     },
 
     login: async (username, password) => {
-        const response = await fetch(`http://localhost:5000/api/auth/login`, {
+        const response = await fetch(`${Config.api}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -61,7 +62,7 @@ const ApiService = {
     },
 
     createUser: async (newUserData, userCredentials) => {
-        const response = await fetch(`http://localhost:5000/api/user/create-user`, {
+        const response = await fetch(`${Config.api}/api/user/create-user`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -83,7 +84,7 @@ const ApiService = {
 
     sendOrder: async (orderData) => {
         const userCredentials = LocalStorageService.getCredentials();
-        const response = await fetch(`http://localhost:5000/api/order/`, {
+        const response = await fetch(`${Config.api}/api/order/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -99,7 +100,7 @@ const ApiService = {
     },
 
     deliverOrderById: async (id, userCredentials) => {
-        const response = await fetch(`http://localhost:5000/api/order/deliver-order/${id}`, {
+        const response = await fetch(`${Config.api}/api/order/deliver-order/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${userCredentials.jwt}`

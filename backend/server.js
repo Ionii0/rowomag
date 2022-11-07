@@ -24,11 +24,17 @@ app.use((err, req, res, next) => {
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/order', orderRouter);
-app.use('/api/products',productsRouter);
+app.use('/api/products', productsRouter);
+
+//FOR PRODUCTION
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(`${__dirname}/../frontend`));
+}
 
 //RUN APPLICATION
-app.listen(process.env.PORT || 5000, () => {
-    console.log("Server is running on port 5000...")
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}...`);
 });
 
 //CONNECT TO DB
