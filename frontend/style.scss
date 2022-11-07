@@ -192,14 +192,8 @@ footer {
   border-radius: 2.4rem;
   transition: 0.25s;
 }
-.box input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button{
-  -webkit-appearance: none;
-  margin: 0;
-}
-.box input[type="number"]{
-  -moz-appearance: textfield;
-}
+
+
 div {
   margin-bottom: 10px;
 }
@@ -230,7 +224,6 @@ div {
 //-------- Cart styling ----------
 
 .cart {
-  display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
 }
@@ -273,11 +266,12 @@ div {
 
 .cart-price {
   flex: 1 2;
-  text-align: right;
+  float:right;
 }
 
 .cart-name > div {
   padding: 1rem;
+  margin:0;
 }
 
 .cart-list h3 {
@@ -321,7 +315,6 @@ div {
 
 //-------- Admin pending orders styling ----------
 .admin {
-  display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
 }

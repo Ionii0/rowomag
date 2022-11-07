@@ -1,5 +1,6 @@
 import Router from "./Router";
 import HeaderRenderer from "./utils/HeaderRenderer";
+import '../style.scss';
 
 const renderView = async () => {
     const view = Router.getCurrentView();

@@ -87,13 +87,12 @@ const CartView = {
                     <div class="cart-name"> 
                         <div>${item.name}</div> 
                             <div class="cart-quantity">
-                                Quantity: <input class="quantity" id="${item._id}" type="number" min="1" max="${item.stock}" value="${item.quantity}">
+                                Quantity: <input class="quantity" id="${item._id}" type="number" min="1" max="${item.stock}" value="${item.quantity}" required>
                                 <button type="button" class="cart-button" id="${item._id}">Delete</button>
+                                      <span class="cart-price"><i class="fa-solid fa-coins" style="margin-right:1rem"></i>${item.price}</span>
                             </div>  
                         
-                        <div class="cart-price">
-                            $${item.price}
-                        </div>
+                      
                     </div>   
                 </li>`
             ).join('\n')}
