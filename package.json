@@ -5,7 +5,7 @@
   "main": "backend/server.js",
   "scripts": {
     "install-frontend": "cd frontend && npm install",
-    "build-frontend": "cd frontend && npm build",
+    "build-frontend": "cd frontend && npm run build",
     "heroku-postbuild": "npm run install-frontend && npm run build-frontend",
     "start": "node backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
