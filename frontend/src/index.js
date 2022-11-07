@@ -1,7 +1,7 @@
 import Router from "./Router";
 import HeaderRenderer from "./utils/HeaderRenderer";
 import '../style.scss';
-import '../fonts/proxima-nova-soft.otf';
+
 const renderView = async () => {
     const view = Router.getCurrentView();
 
