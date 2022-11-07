@@ -1,6 +1,6 @@
 @font-face {
   font-family: proxima-nova-soft;
-  @import "~fonts/proxima-nova-soft.otf";
+  src: url(~fonts/proxima-nova-soft.otf);
 }
 
 input[type=number]::-webkit-inner-spin-button,
