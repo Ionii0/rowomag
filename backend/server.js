@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const data = require("./data.js");
 const mongoose = require('mongoose');
 const config = require("./config");
 const userRouter = require("./routes/UserRoute.js");
