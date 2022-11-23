@@ -50,7 +50,11 @@ const HomeView = {
                 </div>
                 <div class="product-price">
                    <i class="fa-solid fa-coins"></i> ${product.price}
-                   <button class="button-div" id="${product._id}">Add to <i class="fa-solid fa-cart-shopping"></i></button>                   
+                   ${() => {
+                if (product.stock < 0)
+                    return `<span id="${product._id}"> Item out of stocks</span>`;
+                return `<button class="button-div" id="${product._id}">Add to <i class="fa-solid fa-cart-shopping"></i></button>`;
+            }}
                 </div>
               </div>
             </li>`)}
