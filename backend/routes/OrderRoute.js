@@ -19,38 +19,35 @@ orderRouter.post('/', [bodyParser.json(), isAuth],
             user: req.user._id
         });
 
-        for (let item in req.body.items) {
-            const product = await ProductModel.findOne({_id: item._id});
-            if (product.stock < item.quantity) {
-                res.status(406).send({
-                    message: `Not enough ${item.name} in stock!`
-                });
+        //Handling possible errors
+        let errorMessage = ``;
+        for (let i = 0; i < req.body.items.length; i++) {
+            console.log(req.body.items[i]._id);
+            const product = await ProductModel.findOne({_id: req.body.items[i]._id});
+            if (product.stock < req.body.items[i].quantity) {
+                errorMessage += `Not enough ** ${req.body.items[i].name} ** in stock!\n`
             }
         }
-
         const user = await UserModel.findOne({
             _id: req.user._id,
             username: req.user.username,
         });
 
         if (user.tokens < req.body.price) {
+            errorMessage += `You do not have enough tokens!`;
             res.status(406).send({
-                message: 'You do not have enough tokens!'
+                message: errorMessage
             });
         } else {
             const remainingTokens = user.tokens - req.body.price;
             await UserModel.updateOne({_id: req.user._id}, {tokens: remainingTokens});
-            for (let item in req.body.items)
-                await ProductModel.findOneAndUpdate({_id: item._id}, {$inc: {stock: -item.quantity}});
+            for (let i = 0; i < req.body.items.length; i++)
+                await ProductModel.findOneAndUpdate({_id: req.body.items[i]._id}, {$inc: {stock: -req.body.items[i].quantity}});
             const createdOrder = await order.save();
-            console.log("New order created --------------------------");
-            console.log(createdOrder);
-            console.log("--------------------------------------------");
             res.status(201).send({
                 message: 'New Order Created'
             });
         }
-
     })
 );
 orderRouter.get('/pending', [bodyParser.json(), isAdmin], expressAsyncHandler(async (req, res) => {
