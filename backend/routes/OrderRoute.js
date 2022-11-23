@@ -19,6 +19,15 @@ orderRouter.post('/', [bodyParser.json(), isAuth],
             user: req.user._id
         });
 
+        for (let item in req.body.items) {
+            const product = await ProductModel.findOne({_id: item._id});
+            if (product.stock < item.quantity) {
+                res.status(406).send({
+                    message: `Not enough ${item.name} in stock!`
+                });
+            }
+        }
+
         const user = await UserModel.findOne({
             _id: req.user._id,
             username: req.user.username,
@@ -27,14 +36,12 @@ orderRouter.post('/', [bodyParser.json(), isAuth],
         if (user.tokens < req.body.price) {
             res.status(406).send({
                 message: 'You do not have enough tokens!'
-            })
+            });
         } else {
-            remainingTokens = user.tokens - req.body.price;
+            const remainingTokens = user.tokens - req.body.price;
             await UserModel.updateOne({_id: req.user._id}, {tokens: remainingTokens});
-            orderedItems = req.body.items;
-            for (item in orderedItems) {
+            for (let item in req.body.items)
                 await ProductModel.findOneAndUpdate({_id: item._id}, {$inc: {stock: -item.quantity}});
-            }
             const createdOrder = await order.save();
             console.log("New order created --------------------------");
             console.log(createdOrder);
