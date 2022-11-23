@@ -50,7 +50,7 @@ const HomeView = {
                 </div>
                 <div class="product-price">
                    <i class="fa-solid fa-coins"></i> ${product.price}
-                   ${product.stock < 0 ?
+                   ${product.stock <= 0 ?
                      `<span id="${product._id}"> Item out of stocks</span>`
                                         :
                      `<button class="button-div" id="${product._id}">Add to <i class="fa-solid fa-cart-shopping"></i></button>`

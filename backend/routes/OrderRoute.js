@@ -3,6 +3,7 @@ const expressAsyncHandler = require('express-async-handler');
 const bodyParser = require('body-parser');
 const UserModel = require('../models/UserModel');
 const OrderModel = require('../models/OrderModel.js');
+const ProductModel = require('../models/ProductModel');
 const isAuth = require("../middlewares/isAuth.js");
 const isAdmin = require("../middlewares/isAdmin");
 
@@ -30,6 +31,10 @@ orderRouter.post('/', [bodyParser.json(), isAuth],
         } else {
             remainingTokens = user.tokens - req.body.price;
             await UserModel.updateOne({_id: req.user._id}, {tokens: remainingTokens});
+            orderedItems = req.body.items;
+            for (item in orderedItems) {
+                await ProductModel.findOneAndUpdate({_id: item._id}, {$inc: {stock: -item.quantity}});
+            }
             const createdOrder = await order.save();
             console.log("New order created --------------------------");
             console.log(createdOrder);
